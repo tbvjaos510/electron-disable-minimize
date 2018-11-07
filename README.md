@@ -1,4 +1,5 @@
-![image](https://badgen.net/badge/platform/Windows%20only?list=1) (PR welcome for linux and Mac!)
+![image](https://badgen.net/badge/platform/Windows%20only?list=1)
+[![npm version](https://badge.fury.io/js/electron-disable-minimize.svg)](https://badge.fury.io/js/electron-disable-minimize)
 
 This module allow you to set the window attached to the HWND handle to disable minimized.
 
