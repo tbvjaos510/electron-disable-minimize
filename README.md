@@ -1,19 +1,23 @@
 ![image](https://badgen.net/badge/platform/Windows%20only?list=1) (PR welcome for linux and Mac!)
 
-This module allow you to set the window attached to the HWND handle to be placed at the lowest z-index available aka *bottom-most*
+This module allow you to set the window attached to the HWND handle to disable minimized.
 
-It's the inverse of top-most.
+Electron indeed have a ```minimizable: false``` but it minimized at Windows + D (Show Desktop) Event.
 
-Electron indeed have a top-most property but do not have a bottom-most one.
+This module uses the following c++ code. (Thanks to [tordex](https://stackoverflow.com/questions/35045060/how-to-keep-window-visible-at-all-times-but-not-force-it-to-be-on-top))
 
-This native module is a wrapper around [SetWindowPosition](https://msdn.microsoft.com/en-us/library/windows/desktop/ms633545(v=vs.85).aspx) Win32 API function.
+```cpp
+HWND nWinHandle = FindWindowEx(NULL, NULL, "Progman", NULL);
+nWinHandle = FindWindowEx(nWinHandle, NULL, "SHELLDLL_DefView", NULL);
+SetWindowLongPtr(hwnd, -8, (LONG_PTR)nWinHandle);
+```
 
 ## Installation
 
 ```shell
-npm i -S electron-bottom-most   # install the module
+npm i -S electron-disable-minimize   # install the module
 
-./node_modules/.bin/electron-rebuild -f -w electron-bottom-most   # rebuild the module to match your electron version
+"./node_modules/.bin/electron-rebuild" -f -w electron-disable-minimize   # rebuild the module to match your electron version
 ```
 
 ## Usage
@@ -23,9 +27,9 @@ Basically it consists of 2 steps
 
 * Include the module in your .js file:
 ```js
-import { SetBottomMost } from 'electron-bottom-most';
+import { DisableMinimize } from 'electron-disable-minimize';
  - or -
-const { SetBottomMost } = require('electron-bottom-most');
+const { DisableMinimize } = require('electron-disable-minimize');
 ```
 * Create your Electron BrowserWindow
 ```js
@@ -48,20 +52,21 @@ mainWindow.show();
 // get the native HWND handle
 let handle = mainWindow.getNativeWindowHandle();
 
-// set bottom most!
-SetBottomMost(handle);
+// Disable Minimize Perfectly!
+DisableMinimize(handle); // boolean
 
 ```
+If false is returned, the desktop handle cannot be found.
 
-## Todo
-- [ ] Make it safe please
+It didn't work on specific windows version, Uupdate Windows and retry.
 
+## Forked from
+
+* [electron-bottom-most](https://github.com/Armaldio/electron-bottom-most)
 
 ## Authors
 
-* **Armaldio** - [Armaldio](https://github.com/armaldio)
-
-See also the list of [contributors](https://github.com/armaldio/electron-bottom-most/contributors) who participated in this project.
+* **tbvjaos510** - [tbvjaos510](https://github.com/tbvjaos510/)
 
 ## License
 

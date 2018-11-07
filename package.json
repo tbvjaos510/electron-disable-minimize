@@ -1,7 +1,7 @@
 {
-  "name": "electron-bottom-most",
+  "name": "electron-disable-minimize",
   "version": "0.3.0",
-  "description": "Put an electron window bottom-most (set the window to the bottom of the z-index)",
+  "description": "Set a window at the not minimized include Show Desktop Button, [Window] + D",
   "gypfile": true,
   "main": "./build/Release/bottom-most",
   "license": "MIT",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/armaldio/electron-bottom-most"
+    "url": "https://github.com/tbvjaos510/electron-disable-minimize"
   },
   "dependencies": {
     "nan": "^2.8.0",

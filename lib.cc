@@ -12,11 +12,11 @@ using v8::Object;
 using v8::String;
 using v8::Value;
 
-NAN_METHOD(SetBottomMost)
+NAN_METHOD(DisableMinimize)
 {
     if (info.Length() >= 2)
     {
-        return Nan::ThrowError("electron-most-bottom: Invalid number of arguments. Should be 1");
+        return Nan::ThrowError("electron-disable-minimize: Invalid number of arguments. Should be 1");
     }
 
     HWND hwnd = NULL;
@@ -33,18 +33,24 @@ NAN_METHOD(SetBottomMost)
         return;
     }
 
-    unsigned char *bufferData = (unsigned char *)node::Buffer::Data(bufferObj);
-    unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
-    hwnd = (HWND)handle;
+    // Changed Source (electron-show-desktop)
+    HWND nWinHandle = FindWindowEx(NULL, NULL, "Progman", NULL);
+    nWinHandle = FindWindowEx(nWinHandle, NULL, "SHELLDLL_DefView", NULL);
+    bool ok = true;
+    if (nWinHandle == NULL)
+        ok = false;
+    else
+        SetWindowLongPtr(hwnd, -8, (LONG_PTR)nWinHandle);
 
-    bool ok = SetWindowPos(hwnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+    // Original Source (electron-bottom-most)
+    // bool ok = SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
 
     info.GetReturnValue().Set(ok ? Nan::True() : Nan::False());
 }
 
 NAN_MODULE_INIT(Initialize)
 {
-    NAN_EXPORT(target, SetBottomMost);
+    NAN_EXPORT(target, DisableMinimize);
 }
 
 NODE_MODULE(addon, Initialize);
