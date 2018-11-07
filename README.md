@@ -59,7 +59,7 @@ DisableMinimize(handle); // boolean
 ```
 If false is returned, the desktop handle cannot be found.
 
-It didn't work on specific windows version, Uupdate Windows and retry.
+It didn't work on specific windows version, Update Windows and retry.
 
 ## Forked from
 
