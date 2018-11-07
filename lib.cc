@@ -32,6 +32,9 @@ NAN_METHOD(DisableMinimize)
         info.GetReturnValue().Set(Nan::False());
         return;
     }
+    unsigned char *bufferData = (unsigned char *)node::Buffer::Data(bufferObj);
+    unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
+    hwnd = (HWND)handle;
 
     // Changed Source (electron-show-desktop)
     HWND nWinHandle = FindWindowEx(NULL, NULL, "Progman", NULL);
