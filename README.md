@@ -57,9 +57,9 @@ let handle = mainWindow.getNativeWindowHandle();
 DisableMinimize(handle); // boolean
 
 ```
-If false is returned, the desktop handle cannot be found.
-
-It didn't work on specific windows version, Update Windows and retry.
+If false returned, disable failed.
+It works specific Windows status.
+I don't know why disable failed. Windows restart recommend.
 
 ## Forked from
 
