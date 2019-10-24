@@ -21,5 +21,6 @@
   "devDependencies": {
     "electron": "^1.7.10",
     "electron-rebuild": "^1.6.0"
-  }
+  },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
