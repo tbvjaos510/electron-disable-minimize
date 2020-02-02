@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
-const { DisableMinimize } = require('./build/Release/disable-minimize');
+const { DisableMinimize } = require('./build/Release/electron-disable-minimize');
 
 let win;
 
@@ -22,7 +22,7 @@ function createWindow() {
     let handle = win.getNativeWindowHandle();
 
     try {
-        DisableMinimize("strings are not supported as arguments");
+        DisableMinimize(handle);
     } catch (e) {
         console.log('There was an error while setting window to the background!', e)
     }
