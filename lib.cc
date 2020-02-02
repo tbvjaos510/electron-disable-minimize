@@ -36,7 +36,7 @@ NAN_METHOD(DisableMinimize)
     unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
     hwnd = (HWND)handle;
 
-    // Changed Source (electron-show-desktop)
+#ifdef _WIN32
     HWND nWinHandle = FindWindowEx(NULL, NULL, "Progman", NULL);
     nWinHandle = FindWindowEx(nWinHandle, NULL, "SHELLDLL_DefView", NULL);
     bool ok = true;
@@ -45,10 +45,9 @@ NAN_METHOD(DisableMinimize)
     else
         SetWindowLongPtr(hwnd, -8, (LONG_PTR)nWinHandle);
 
-    // Original Source (electron-bottom-most)
-    // bool ok = SetWindowPos(hwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
-
     info.GetReturnValue().Set(ok ? Nan::True() : Nan::False());
+#endif
+    info.GetReturnValue().Set(Nan::False());
 }
 
 NAN_MODULE_INIT(Initialize)

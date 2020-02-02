@@ -3,4 +3,4 @@ bin/**/*
 build/**/*
 \.idea/
 yarn.lock
-
+yarn-error.log
