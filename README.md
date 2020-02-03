@@ -1,4 +1,4 @@
-# Electron-Diable-Minimize
+# Electron Diable Minimize
 
 ![image](https://badgen.net/badge/platform/Windows%20only?list=1)
 [![npm version](https://badge.fury.io/js/electron-disable-minimize.svg)](https://badge.fury.io/js/electron-disable-minimize)
@@ -38,7 +38,7 @@ or you can rebuild automatically!
 // package.json
 ...
 "scripts": {
-  "install": "./node_modules/.bin/electron-rebuild" // rebuild after install
+  "install": "./node_modules/.bin/electron-rebuild"
 }
 ...
 ```
