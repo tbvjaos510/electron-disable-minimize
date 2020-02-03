@@ -5,7 +5,10 @@
                 "<!(node -e \"require('nan')\")"
             ],
             "target_name": "electron-disable-minimize",
-            "sources": ["lib.cc"]
+            "sources": [],
+            "conditions": [
+                ['OS=="win"', {'sources':['lib.cc']},  { "sources": ["none.cc"] }],
+            ]
         }
     ]
 }

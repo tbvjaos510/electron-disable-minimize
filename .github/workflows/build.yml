@@ -1,0 +1,23 @@
+name: Build Module
+on: [push]
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: ["8", "10", "12"]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@master
+      - name: Node ${{ matrix.node }}, OS ${{ matrix.os }}
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node }}
+      - name: npm module install
+        run: yarn install
+      - name: build module
+        run: yarn compile
+      - name: Run headless test
+        uses: GabrielBB/xvfb-action@v1.0
+        with:
+          run: yarn test

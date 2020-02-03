@@ -9,8 +9,7 @@
   "scripts": {
     "electron-rebuild": "./node_modules/.bin/electron-rebuild -f -w electron-disable-minimize",
     "compile": "node-gyp rebuild & npm run electron-rebuild",
-    "test": "electron ./test.js",
-    "postinstall": "npm run electron-rebuild"
+    "test": "electron ./test.js"
   },
   "repository": {
     "type": "git",

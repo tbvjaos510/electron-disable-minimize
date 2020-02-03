@@ -8,7 +8,8 @@ let win;
 function createWindow() {
     win = new BrowserWindow({
         width: 800,
-        height: 600
+        height: 600,
+        show: false,
     });
 
     win.loadURL(url.format({
@@ -22,14 +23,19 @@ function createWindow() {
     let handle = win.getNativeWindowHandle();
 
     try {
-        DisableMinimize(handle);
+        // Error Test
+        DisableMinimize('');
     } catch (e) {
         console.log('There was an error while setting window to the background!', e)
     }
 
+    // Success Test
     var boolean = DisableMinimize(handle);
     console.log("Return value is " + boolean);
 
+    setTimeout(() => {
+        app.exit();
+    }, 1000)
     win.on('closed', () => {
         win = null;
     });
