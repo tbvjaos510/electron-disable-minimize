@@ -31,11 +31,9 @@ NAN_METHOD(DisableMinimize)
         info.GetReturnValue().Set(Nan::False());
         return;
     }
-#ifdef _WIN32
-    HWND hwnd = NULL;
     unsigned char *bufferData = (unsigned char *)node::Buffer::Data(bufferObj);
     unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
-    hwnd = (HWND)handle;
+    HWND hwnd = (HWND)handle;
 
     HWND nWinHandle = FindWindowEx(NULL, NULL, "Progman", NULL);
     nWinHandle = FindWindowEx(nWinHandle, NULL, "SHELLDLL_DefView", NULL);
@@ -46,8 +44,6 @@ NAN_METHOD(DisableMinimize)
         SetWindowLongPtr(hwnd, -8, (LONG_PTR)nWinHandle);
 
     info.GetReturnValue().Set(ok ? Nan::True() : Nan::False());
-#endif
-    info.GetReturnValue().Set(Nan::False());
 }
 
 NAN_MODULE_INIT(Initialize)
