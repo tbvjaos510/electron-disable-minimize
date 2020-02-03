@@ -1,6 +1,6 @@
 {
   "name": "electron-disable-minimize",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "Set a window at the not minimized include Show Desktop Button, [Window] + D",
   "gypfile": true,
   "keywords": ["disable minimize", "electron bottom most", "block minimize"],
