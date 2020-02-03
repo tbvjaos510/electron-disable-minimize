@@ -19,7 +19,6 @@ NAN_METHOD(DisableMinimize)
         return Nan::ThrowError("electron-disable-minimize: Invalid number of arguments. Should be 1");
     }
 
-    HWND hwnd = NULL;
     v8::Local<v8::Object> bufferObj;
 
     if (info[0]->IsArrayBufferView() && info[0]->IsObject() && info[0]->IsTypedArray() && info[0]->IsUint8Array())
@@ -32,11 +31,12 @@ NAN_METHOD(DisableMinimize)
         info.GetReturnValue().Set(Nan::False());
         return;
     }
+#ifdef _WIN32
+    HWND hwnd = NULL;
     unsigned char *bufferData = (unsigned char *)node::Buffer::Data(bufferObj);
     unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
     hwnd = (HWND)handle;
 
-#ifdef _WIN32
     HWND nWinHandle = FindWindowEx(NULL, NULL, "Progman", NULL);
     nWinHandle = FindWindowEx(nWinHandle, NULL, "SHELLDLL_DefView", NULL);
     bool ok = true;
