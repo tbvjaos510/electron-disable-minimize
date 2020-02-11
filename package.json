@@ -5,6 +5,7 @@
   "gypfile": true,
   "keywords": ["disable minimize", "electron bottom most", "block minimize"],
   "main": "./build/Release/electron-disable-minimize",
+  "types": "./types.d.ts",
   "license": "MIT",
   "scripts": {
     "electron-rebuild": "./node_modules/.bin/electron-rebuild -f -w electron-disable-minimize",
