@@ -1,4 +1,5 @@
 node_modules
 build
 index.html
-index.js
+.github
+test.js
