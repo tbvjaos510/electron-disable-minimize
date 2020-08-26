@@ -1,2 +1,2 @@
 
-export function DisableMinimize(handle: number): boolean
+export function DisableMinimize(handle: Buffer): boolean

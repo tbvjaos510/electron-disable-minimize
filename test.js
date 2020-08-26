@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
-const { DisableMinimize } = require('./build/Release/electron-disable-minimize');
+const { default: DisableMinimize } = require('./build/Release/electron-disable-minimize');
 
 let win;
 
@@ -9,7 +9,6 @@ function createWindow() {
     win = new BrowserWindow({
         width: 800,
         height: 600,
-        show: false,
     });
 
     win.loadURL(url.format({

@@ -35,13 +35,20 @@ NAN_METHOD(DisableMinimize)
     unsigned long handle = *reinterpret_cast<unsigned long *>(bufferData);
     HWND hwnd = (HWND)handle;
 
-    HWND nWinHandle = FindWindowEx(NULL, NULL, "Progman", NULL);
-    nWinHandle = FindWindowEx(nWinHandle, NULL, "SHELLDLL_DefView", NULL);
+    HWND desktop = GetDesktopWindow();
+    HWND hWorkerW = NULL;
+    HWND hShellViewWin = NULL;
+    do
+    {
+        hWorkerW = FindWindowEx(desktop, hWorkerW, "WorkerW", NULL);
+        hShellViewWin = FindWindowEx(hWorkerW, 0, "SHELLDLL_DefView", 0);
+    } while (hShellViewWin == NULL && hWorkerW != NULL);
+
     bool ok = true;
-    if (nWinHandle == NULL)
+    if (hShellViewWin == NULL)
         ok = false;
     else
-        SetWindowLongPtr(hwnd, -8, (LONG_PTR)nWinHandle);
+        SetWindowLongPtr(hwnd, -8, (LONG_PTR)hShellViewWin);
 
     info.GetReturnValue().Set(ok ? Nan::True() : Nan::False());
 }
