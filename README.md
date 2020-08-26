@@ -8,13 +8,7 @@ This module allow you to set the window attached to the HWND handle to disable m
 
 Electron indeed have a ```minimizable: false``` but it minimized at Windows + D (Show Desktop) Event.
 
-This module uses the following c++ code. (Thanks to [tordex](https://stackoverflow.com/questions/35045060/how-to-keep-window-visible-at-all-times-but-not-force-it-to-be-on-top))
-
-```cpp
-HWND nWinHandle = FindWindowEx(NULL, NULL, "Progman", NULL);
-nWinHandle = FindWindowEx(nWinHandle, NULL, "SHELLDLL_DefView", NULL);
-SetWindowLongPtr(hwnd, -8, (LONG_PTR)nWinHandle);
-```
+This module set window parents to Desktop HWND("SHELLDLL_DefView")
 
 ## Installation
 
